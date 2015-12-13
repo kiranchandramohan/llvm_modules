@@ -1,0 +1,53 @@
+g++ -rdynamic -I/usr/local/include  -fPIC -fvisibility-inlines-hidden -Wall -W -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wno-maybe-uninitialized -Wno-comment -std=c++11 -ffunction-sections -fdata-sections  -fno-exceptions -fno-rtti  -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -g -O0   -c -o memDepAnalysis.o memDepAnalysis.cpp
+memDepAnalysis.cpp: In member function ‘void {anonymous}::memDepAnalysis::populateLoopStores(llvm::LoopInfo&, llvm::Loop*)’:
+memDepAnalysis.cpp:59:30: error: no matching function for call to ‘std::unordered_map<llvm::Loop*, std::vector<int> >::insert(std::pair<llvm::Loop*, std::vector<llvm::StoreInst*> >&)’
+           storeMap.insert(myp) ;
+                              ^
+memDepAnalysis.cpp:59:30: note: candidates are:
+In file included from /usr/include/c++/4.8/unordered_map:48:0,
+                 from memDepAnalysis.cpp:23:
+/usr/include/c++/4.8/bits/unordered_map.h:362:7: note: std::pair<typename std::_Hashtable<_Key, std::pair<const _Key, _Tp>, _Alloc, std::__detail::_Select1st, _Pred, _Hash, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<std::__not_<std::__and_<std::__is_fast_hash<_Hash>, std::is_default_constructible<_Hash>, std::is_copy_assignable<_Hash>, std::__detail::__is_noexcept_hash<_Key, _Hash> > >::value, false, true> >::iterator, bool> std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::insert(const value_type&) [with _Key = llvm::Loop*; _Tp = std::vector<int>; _Hash = std::hash<llvm::Loop*>; _Pred = std::equal_to<llvm::Loop*>; _Alloc = std::allocator<std::pair<llvm::Loop* const, std::vector<int> > >; typename std::_Hashtable<_Key, std::pair<const _Key, _Tp>, _Alloc, std::__detail::_Select1st, _Pred, _Hash, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<std::__not_<std::__and_<std::__is_fast_hash<_Hash>, std::is_default_constructible<_Hash>, std::is_copy_assignable<_Hash>, std::__detail::__is_noexcept_hash<_Key, _Hash> > >::value, false, true> >::iterator = std::__detail::_Node_iterator<std::pair<llvm::Loop* const, std::vector<int> >, false, false>; std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::value_type = std::pair<llvm::Loop* const, std::vector<int> >]
+       insert(const value_type& __x)
+       ^
+/usr/include/c++/4.8/bits/unordered_map.h:362:7: note:   no known conversion for argument 1 from ‘std::pair<llvm::Loop*, std::vector<llvm::StoreInst*> >’ to ‘const value_type& {aka const std::pair<llvm::Loop* const, std::vector<int> >&}’
+/usr/include/c++/4.8/bits/unordered_map.h:369:2: note: template<class _Pair, class> std::pair<typename std::_Hashtable<_Key, std::pair<const _Key, _Tp>, _Alloc, std::__detail::_Select1st, _Pred, _Hash, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<std::__not_<std::__and_<std::__is_fast_hash<_Hash>, std::is_default_constructible<_Hash>, std::is_copy_assignable<_Hash>, std::__detail::__is_noexcept_hash<_Key, _Hash> > >::value, false, true> >::iterator, bool> std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::insert(_Pair&&) [with _Pair = _Pair; <template-parameter-2-2> = <template-parameter-1-2>; _Key = llvm::Loop*; _Tp = std::vector<int>; _Hash = std::hash<llvm::Loop*>; _Pred = std::equal_to<llvm::Loop*>; _Alloc = std::allocator<std::pair<llvm::Loop* const, std::vector<int> > >]
+  insert(_Pair&& __x)
+  ^
+/usr/include/c++/4.8/bits/unordered_map.h:369:2: note:   template argument deduction/substitution failed:
+/usr/include/c++/4.8/bits/unordered_map.h:365:32: error: no type named ‘type’ in ‘struct std::enable_if<false, void>’
+       template<typename _Pair, typename = typename
+                                ^
+/usr/include/c++/4.8/bits/unordered_map.h:396:7: note: std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::iterator std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::insert(std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::const_iterator, const value_type&) [with _Key = llvm::Loop*; _Tp = std::vector<int>; _Hash = std::hash<llvm::Loop*>; _Pred = std::equal_to<llvm::Loop*>; _Alloc = std::allocator<std::pair<llvm::Loop* const, std::vector<int> > >; std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::iterator = std::__detail::_Node_iterator<std::pair<llvm::Loop* const, std::vector<int> >, false, false>; std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::const_iterator = std::__detail::_Node_const_iterator<std::pair<llvm::Loop* const, std::vector<int> >, false, false>; std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::value_type = std::pair<llvm::Loop* const, std::vector<int> >]
+       insert(const_iterator __hint, const value_type& __x)
+       ^
+/usr/include/c++/4.8/bits/unordered_map.h:396:7: note:   candidate expects 2 arguments, 1 provided
+/usr/include/c++/4.8/bits/unordered_map.h:403:2: note: template<class _Pair, class> std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::iterator std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::insert(std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::const_iterator, _Pair&&) [with _Pair = _Pair; <template-parameter-2-2> = <template-parameter-1-2>; _Key = llvm::Loop*; _Tp = std::vector<int>; _Hash = std::hash<llvm::Loop*>; _Pred = std::equal_to<llvm::Loop*>; _Alloc = std::allocator<std::pair<llvm::Loop* const, std::vector<int> > >]
+  insert(const_iterator __hint, _Pair&& __x)
+  ^
+/usr/include/c++/4.8/bits/unordered_map.h:403:2: note:   template argument deduction/substitution failed:
+memDepAnalysis.cpp:59:30: note:   cannot convert ‘myp’ (type ‘std::pair<llvm::Loop*, std::vector<llvm::StoreInst*> >’) to type ‘std::unordered_map<llvm::Loop*, std::vector<int> >::const_iterator {aka std::__detail::_Node_const_iterator<std::pair<llvm::Loop* const, std::vector<int> >, false, false>}’
+           storeMap.insert(myp) ;
+                              ^
+In file included from /usr/include/c++/4.8/unordered_map:48:0,
+                 from memDepAnalysis.cpp:23:
+/usr/include/c++/4.8/bits/unordered_map.h:418:2: note: template<class _InputIterator> void std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::insert(_InputIterator, _InputIterator) [with _InputIterator = _InputIterator; _Key = llvm::Loop*; _Tp = std::vector<int>; _Hash = std::hash<llvm::Loop*>; _Pred = std::equal_to<llvm::Loop*>; _Alloc = std::allocator<std::pair<llvm::Loop* const, std::vector<int> > >]
+  insert(_InputIterator __first, _InputIterator __last)
+  ^
+/usr/include/c++/4.8/bits/unordered_map.h:418:2: note:   template argument deduction/substitution failed:
+memDepAnalysis.cpp:59:30: note:   candidate expects 2 arguments, 1 provided
+           storeMap.insert(myp) ;
+                              ^
+In file included from /usr/include/c++/4.8/unordered_map:48:0,
+                 from memDepAnalysis.cpp:23:
+/usr/include/c++/4.8/bits/unordered_map.h:429:7: note: void std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::insert(std::initializer_list<typename std::_Hashtable<_Key, std::pair<const _Key, _Tp>, _Alloc, std::__detail::_Select1st, _Pred, _Hash, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<std::__not_<std::__and_<std::__is_fast_hash<_Hash>, std::is_default_constructible<_Hash>, std::is_copy_assignable<_Hash>, std::__detail::__is_noexcept_hash<_Key, _Hash> > >::value, false, true> >::value_type>) [with _Key = llvm::Loop*; _Tp = std::vector<int>; _Hash = std::hash<llvm::Loop*>; _Pred = std::equal_to<llvm::Loop*>; _Alloc = std::allocator<std::pair<llvm::Loop* const, std::vector<int> > >; typename std::_Hashtable<_Key, std::pair<const _Key, _Tp>, _Alloc, std::__detail::_Select1st, _Pred, _Hash, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<std::__not_<std::__and_<std::__is_fast_hash<_Hash>, std::is_default_constructible<_Hash>, std::is_copy_assignable<_Hash>, std::__detail::__is_noexcept_hash<_Key, _Hash> > >::value, false, true> >::value_type = std::pair<llvm::Loop* const, std::vector<int> >]
+       insert(initializer_list<value_type> __l)
+       ^
+/usr/include/c++/4.8/bits/unordered_map.h:429:7: note:   no known conversion for argument 1 from ‘std::pair<llvm::Loop*, std::vector<llvm::StoreInst*> >’ to ‘std::initializer_list<std::pair<llvm::Loop* const, std::vector<int> > >’
+memDepAnalysis.cpp:62:30: warning: unused variable ‘SI’ [-Wunused-variable]
+                   StoreInst *SI = dyn_cast<StoreInst>(&I);
+                              ^
+memDepAnalysis.cpp: In member function ‘void {anonymous}::memDepAnalysis::printSCEV(const llvm::SCEV*)’:
+memDepAnalysis.cpp:96:33: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+                 for(int i=0 ; i<num_opnds ; i++) {
+                                 ^
+make: *** [memDepAnalysis.o] Error 1

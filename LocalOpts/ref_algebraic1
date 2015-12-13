@@ -1,0 +1,37 @@
+define i32 @compute_algebraic1(i32 %a) nounwind {
+entry:
+  %a.addr = alloca i32, align 4
+  %result = alloca i32, align 4
+  store i32 %a, i32* %a.addr, align 4
+  %0 = load i32* %a.addr, align 4
+  %add = add nsw i32 %0, 0
+  store i32 %add, i32* %result, align 4
+  %1 = load i32* %a.addr, align 4
+  %add1 = add nsw i32 0, %1
+  %2 = load i32* %result, align 4
+  %add2 = add nsw i32 %2, %add1
+  store i32 %add2, i32* %result, align 4
+  %3 = load i32* %a.addr, align 4
+  %mul = mul nsw i32 %3, 1
+  %4 = load i32* %result, align 4
+  %add3 = add nsw i32 %4, %mul
+  store i32 %add3, i32* %result, align 4
+  %5 = load i32* %a.addr, align 4
+  %mul4 = mul nsw i32 1, %5
+  %6 = load i32* %result, align 4
+  %add5 = add nsw i32 %6, %mul4
+  store i32 %add5, i32* %result, align 4
+  %7 = load i32* %a.addr, align 4
+  %sub = sub nsw i32 %7, 0
+  %8 = load i32* %result, align 4
+  %add6 = add nsw i32 %8, %sub
+  store i32 %add6, i32* %result, align 4
+  %9 = load i32* %a.addr, align 4
+  %div = sdiv i32 %9, 1
+  %10 = load i32* %result, align 4
+  %add7 = add nsw i32 %10, %div
+  store i32 %add7, i32* %result, align 4
+  %11 = load i32* %result, align 4
+  ret i32 %11
+}
+

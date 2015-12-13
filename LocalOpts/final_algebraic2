@@ -1,0 +1,23 @@
+define i32 @compute_algebraic2(i32 %a, i32 %b) nounwind {
+entry:
+  %a.addr = alloca i32, align 4
+  %b.addr = alloca i32, align 4
+  %result = alloca i32, align 4
+  store i32 %a, i32* %a.addr, align 4
+  store i32 %b, i32* %b.addr, align 4
+  %0 = load i32* %a.addr, align 4
+  %1 = load i32* %b.addr, align 4
+  %add = add nsw i32 %0, %1
+  %2 = load i32* %a.addr, align 4
+  %3 = load i32* %a.addr, align 4
+  %div = sdiv i32 %2, %3
+  %add1 = add nsw i32 %add, %div
+  %4 = load i32* %b.addr, align 4
+  %5 = load i32* %b.addr, align 4
+  %div2 = sdiv i32 %4, %5
+  %add3 = add nsw i32 %add1, %div2
+  store i32 %add3, i32* %result, align 4
+  %6 = load i32* %result, align 4
+  ret i32 %6
+}
+
