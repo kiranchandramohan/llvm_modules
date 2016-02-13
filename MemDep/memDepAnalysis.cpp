@@ -163,20 +163,20 @@ namespace {
       }
 
       void printSCEV(const SCEV* scv) {
-            scv->dump() ;
-            //if(dyn_cast<SCEVConstant>(scv)) {
-            //    auto *TC = dyn_cast<SCEVConstant>(scv) ;
-            //    std::cout<<" Value = "<<TC->getValue()->getZExtValue()<<"\n" ;
-            //} else if(dyn_cast<SCEVNAryExpr>(scv)) {
-            //    std::cout<<"SCEVNaryExpr\n" ;
-            //    auto *TripCountC = dyn_cast<SCEVNAryExpr>(scv) ;
-            //    size_t num_opnds = TripCountC->getNumOperands() ;
-            //    std::cout<<"num_opnds = "<<num_opnds<<"\n" ;
-            //    for(int i=0 ; i<num_opnds ; i++) {
-            //        const SCEV* s = TripCountC->getOperand(i) ;
-            //        printSCEV(s) ;
-            //    }
-            //}
+            //scv->dump() ;
+            if(dyn_cast<SCEVConstant>(scv)) {
+                auto *TC = dyn_cast<SCEVConstant>(scv) ;
+                std::cout<<" Value = "<<TC->getValue()->getZExtValue()<<"\n" ;
+            } else if(dyn_cast<SCEVNAryExpr>(scv)) {
+                std::cout<<"SCEVNaryExpr\n" ;
+                auto *TripCountC = dyn_cast<SCEVNAryExpr>(scv) ;
+                size_t num_opnds = TripCountC->getNumOperands() ;
+                std::cout<<"num_opnds = "<<num_opnds<<"\n" ;
+                for(int i=0 ; i<num_opnds ; i++) {
+                    const SCEV* s = TripCountC->getOperand(i) ;
+                    printSCEV(s) ;
+                }
+            }
       }
 
       //virtual bool runOnModule(Module& M)
